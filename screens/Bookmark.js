@@ -7,9 +7,12 @@ import {
   Text,
   Pressable,
   TouchableOpacity,
+  ScrollView,
+  RefreshControl,
 } from "react-native";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+
 
 const Bookmark = () => {
   const navigation = useNavigation();
@@ -69,12 +72,12 @@ const Bookmark = () => {
   }
 
 
-
   return ( <View style={styles.bookmarkBG}>
     <View style={styles.bookmark2}>
       <StatusBar barStyle="default" />
       <View style={styles.rectangleView} />
-      <Text style={styles.bookmark}>บุ๊กมาร์ก</Text>
+      <ScrollView style = {styles.scrollView}>
+      <View style={styles.ScrollViewData}>
       {itemsBook.map(item => (
       <View style={{height: 140}}>
       <TouchableOpacity style={styles.delete} onPress = {() => deleteData(item.number)}>
@@ -119,6 +122,11 @@ const Bookmark = () => {
       </Pressable>
       </View>
       ))}
+      </View>
+      </ScrollView>
+      <View style={styles.BGAvailable}>
+      </View>
+      <Text style={styles.bookmark}>บุ๊กมาร์ก</Text>
       <Pressable style={styles.back} onPress={() => navigation.goBack()}>
         <Image
           style={styles.icon}
@@ -182,6 +190,18 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     maxHeight: "100%",
   },
+  scrollView: {
+    flex: 1,
+  },
+  ScrollViewData: {
+    top: 0,
+    left: 0,
+    position: "relative",
+    flex: 1,
+    width: "100%",
+    height: 2200,
+    overflow: "hidden",
+  },
   rectangleView: {
     position: "absolute",
     height: "12.63%",
@@ -199,6 +219,14 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 12,
     shadowOpacity: 1,
+  },
+  BGAvailable: {
+    position: "absolute",
+    top: -10,
+    left: 0,
+    width: "100%",
+    height: 100,
+    backgroundColor: "#fff",
   },
   back: {
     position: "absolute",
