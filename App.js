@@ -43,8 +43,9 @@ const App = () => {
     var time;
     for (var i=0; i < itemsTimeNoti.length; i++) {
         time = itemsTimeNoti[i].time;
+        name = itemsTimeNoti[i].name;
         if(time == hm){
-          console.log("Alert");
+          console.log("ขณะนี้รถไฟหมายเลขขบวน 275 ถึง"+name+" แล้ว ณ เวลา "+time);
         }
     }
   }
