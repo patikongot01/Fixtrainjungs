@@ -18,12 +18,36 @@ import Search2 from "./screens/Search2";
 import Search from "./screens/Search";
 import Notification1 from "./screens/Notification1";
 import Home from "./screens/Home";
+import { useEffect, useState } from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
+  const [ itemsTimeNoti, setItemsTimeNoti] = useState([])
+  useEffect(() => {
+    fetch('https://shark-app-wblp9.ondigitalocean.app/train/275')
+        .then(res => res.json())
+        .then((result) => {
+          setItemsTimeNoti(result)
+        })
+  }, [])
+
+  var hours = new Date().getHours(); //To get the Current Hours
+  var min = new Date().getMinutes(); //To get the Current Minutes
+  var hm = (hours)+":"+(min);
+  console.log(hm);
+  CalNoti();
+  function CalNoti() {
+    var time;
+    for (var i=0; i < itemsTimeNoti.length; i++) {
+        time = itemsTimeNoti[i].time;
+        if(time == hm){
+          console.log("Alert");
+        }
+    }
+  }
 
   return (
     <>
